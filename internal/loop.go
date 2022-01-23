@@ -1,9 +1,9 @@
 package internal
 
 import (
+	"github.com/mmcdole/gofeed"
 	"github.com/myl7/bibak/internal/config"
 	"log"
-	"net/http"
 	"runtime/debug"
 	"time"
 )
@@ -26,8 +26,13 @@ func Loop() {
 }
 
 func round() {
-	res, err := http.Get(config.Cfg.RsshubUrl)
+	p := gofeed.NewParser()
+	feed, err := p.ParseURL(config.Cfg.RsshubUrl)
 	if err != nil {
 		panic(err)
+	}
+
+	for i := range feed.Items {
+		handleItem(feed.Items[i])
 	}
 }

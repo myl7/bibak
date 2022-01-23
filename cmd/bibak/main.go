@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/joho/godotenv"
+	"github.com/myl7/bibak/internal"
 	"github.com/myl7/bibak/internal/config"
+	"github.com/myl7/bibak/internal/db"
 	"log"
 )
 
@@ -13,4 +15,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	err = db.LoadDB()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	internal.Loop()
 }
