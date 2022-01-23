@@ -20,3 +20,4 @@
 
 # Config
 *.sqlite
+.env

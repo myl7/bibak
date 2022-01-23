@@ -3,7 +3,7 @@ package config
 import "time"
 
 type Config struct {
-	BID          string
+	RsshubUrl    string
 	LoopInterval time.Duration
 }
 
@@ -11,7 +11,7 @@ func GetConfig() (*Config, error) {
 	c := Config{}
 	var err error
 
-	c.BID, err = getEnvStr("APP_BID")
+	c.RsshubUrl, err = getEnvStr("APP_RSSHUB_URL")
 	if err != nil {
 		return nil, err
 	}
