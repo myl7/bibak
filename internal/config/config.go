@@ -1,7 +1,10 @@
 package config
 
+import "time"
+
 type Config struct {
-	BID string
+	BID          string
+	LoopInterval time.Duration
 }
 
 func GetConfig() (*Config, error) {
@@ -12,6 +15,12 @@ func GetConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	loopInterval, err := getEnvIntWithDefault("APP_LOOP_INTERVAL", 5*60)
+	if err != nil {
+		return nil, err
+	}
+	c.LoopInterval = time.Duration(loopInterval) * time.Second
 
 	return &c, nil
 }
