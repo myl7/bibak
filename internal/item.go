@@ -49,7 +49,7 @@ func getBID(link string) string {
 }
 
 func bbdown(f *model.FavItem) error {
-	err := os.Mkdir(f.BID, 755)
+	err := os.Mkdir(f.BID, 0755)
 	if err != nil {
 		return err
 	}
